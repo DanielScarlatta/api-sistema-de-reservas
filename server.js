@@ -1,13 +1,19 @@
 require('dotenv').config();
-require('module-alias/register')
-const app = require('@app');
+require('module-alias/register');
 
-const config = require('@config/index.js')
+// const express = require('express')
 
-app.listen(config.app.port, (err) => {
-  if(err) {
-    console.log('Ocorreu um erro ao iniciar o server! ', err)
-  }
+const config = require('@config/index.js');
 
-  console.log(`Server online! na porta ${config.app.port}`)
-})
+const boot = require('@services/boot');
+const mongoose = require('mongoose');
+
+// mongoose.set('useNewUrlParcer', true);
+// mongoose.set('useCreateIndex', true);
+
+if(config.db.connectionString) {
+  mongoose.connect(config.db.connectionString)
+  boot()
+} else {
+  console.log('No connection string provided')
+}

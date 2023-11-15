@@ -7,8 +7,9 @@
       "@app/*": ["src/*"],
       "@config/*": ["src/config/*"],
       "@controller/*": ["src/controller/*"],
-      "@model/*": ["src/model/*"],
-      "@routers/*": ["src/routers/*"]
+      "@models/*": ["src/models/*"],
+      "@routers/*": ["src/routers/*"],
+      "@services/*": ["src/services/*"]
 
     }
   },
