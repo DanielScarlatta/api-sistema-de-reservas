@@ -5,6 +5,7 @@ const app = express();
 
 const userRouter = require('@routers/routerUser.js');
 
+
 // configurando o JSON para as respostas
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
