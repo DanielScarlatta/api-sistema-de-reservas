@@ -4,10 +4,12 @@
     "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/*"],
+      "@src/*": ["src/*"],
+      "@app/*": ["src/app*"],
       "@config/*": ["src/config/*"],
       "@controller/*": ["src/controller/*"],
       "@models/*": ["src/models/*"],
+      "@modules/*": ["src/modules/*"],
       "@routers/*": ["src/routers/*"],
       "@services/*": ["src/services/*"]
 

@@ -1,19 +1,21 @@
-require('dotenv').config();
-require('module-alias/register');
+require("dotenv").config();
+require("module-alias/register");
 
-// const express = require('express')
+const express = require("express");
 
-const config = require('@config/index.js');
+const sendemail = require('@src/modules/email/forgotEmail')
 
-const boot = require('@services/boot');
-const mongoose = require('mongoose');
+sendemail()
 
-// mongoose.set('useNewUrlParcer', true);
-// mongoose.set('useCreateIndex', true);
+// const config = require('@config/index.js');
 
-if(config.db.connectionString) {
-  mongoose.connect(config.db.connectionString)
-  boot()
-} else {
-  console.log('No connection string provided')
-}
+// const boot = require('@services/boot');
+// const mongoose = require('mongoose');
+
+// if(config.db.connectionString) {
+//   mongoose.connect(config.db.connectionString)
+//   boot()
+// } else {
+//   console.log('No connection string provided')
+// }
+
