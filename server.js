@@ -5,17 +5,17 @@ const express = require("express");
 
 const sendemail = require('@src/modules/email/forgotEmail')
 
-sendemail()
+// sendemail()
 
-// const config = require('@config/index.js');
+const config = require('@config/index.js');
 
-// const boot = require('@services/boot');
-// const mongoose = require('mongoose');
+const boot = require('@services/boot');
+const mongoose = require('mongoose');
 
-// if(config.db.connectionString) {
-//   mongoose.connect(config.db.connectionString)
-//   boot()
-// } else {
-//   console.log('No connection string provided')
-// }
+if(config.db.connectionString) {
+  mongoose.connect(config.db.connectionString)
+  boot()
+} else {
+  console.log('No connection string provided')
+}
 
