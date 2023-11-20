@@ -153,7 +153,14 @@ const user = {
       })
     }
 
-    sendEmail()
+    try {
+      const result = await sendEmail(email, existUser.name, existUser.id);
+      console.log("Email enviado com sucesso:", result);
+      return res.status(200).json({ msg: "Email enviado com sucesso, por favor verifique sua caixa de entrada"})
+    } catch (error) {
+      console.error("Erro ao enviar o email:", error);
+    }
+    
   }
 };
 

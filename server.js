@@ -3,10 +3,6 @@ require("module-alias/register");
 
 const express = require("express");
 
-const sendemail = require('@src/modules/email/forgotEmail')
-
-// sendemail()
-
 const config = require('@config/index.js');
 
 const boot = require('@services/boot');
