@@ -317,7 +317,9 @@
                                   ><span
                                       style="line-height: 25.2px; font-size: 18px;"
                                     >Olá, </span>
-                                    <span style="line-height: 25.2px; font-size: 18px;"> {{name}}</span></p>
+                                    <span
+                                      style="line-height: 25.2px; font-size: 18px;"
+                                    > {{name}}</span></p>
                                   <p
                                     style="line-height: 140%; margin: 0px; color: #000000; font-family: Lato, sans-serif; font-size: 14px; text-align: left; white-space: normal; background-color: #ffffff;"
                                   > </p>
@@ -335,8 +337,8 @@
                                     style="line-height: 140%; margin: 0px; color: #000000; font-family: Lato, sans-serif; font-size: 14px; text-align: left; white-space: normal; background-color: #ffffff;"
                                   ><br style="line-height: inherit;" /><span
                                       style="line-height: 25.2px; font-size: 18px;"
-                                    >Para redefinir sua senha, siga o link
-                                      abaixo:</span></p>
+                                    >Para redefinir sua senha, copie o código
+                                      abaixo abaixo:</span></p>
                                 </div>
 
                               </td>
@@ -355,28 +357,15 @@
                           <tbody>
                             <tr>
                               <td
-                                style="overflow-wrap:break-word;word-break:break-word;padding:0px 40px;font-family:'Lato',sans-serif;"
-                                align="left"
+                                style="background-color:#fff;color:#444;font-family:'Amazon Ember','Helvetica Neue',Roboto,Arial,sans-serif;font-size:14px;line-height:140%;padding:25px 35px;padding-top:0;text-align:center"
                               >
-
-                                <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
-                                <div align="left">
-                                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:52px; v-text-anchor:middle; width:204px;" arcsize="2%"  stroke="f" fillcolor="#18163a"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
-                                  <a
-                                    href="https://www.youtube.com/"
-                                    target="_blank"
-                                    class="v-button"
-                                    style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #18163a; border-radius: 1px;-webkit-border-radius: 1px; -moz-border-radius: 1px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;"
-                                  >
-                                    <span
-                                      style="display:block;padding:15px 40px;line-height:120%;"
-                                    ><span
-                                        style="font-size: 18px; line-height: 21.6px;"
-                                      >Redefinir Senha</span></span>
-                                  </a>
-                                  <!--[if mso]></center></v:roundrect><![endif]-->
+                                <div
+                                  style="font-weight:bold;padding-bottom:15px"
+                                >Código de verificação</div>
+                                <div style="color:#000;font-size:36px;font-weight:bold;padding-bottom:15px">
+                                  {{tokenForgotPassword}}
                                 </div>
-
+                                <div>(Este código é válido por 10 minutos)</div>
                               </td>
                             </tr>
                           </tbody>
@@ -435,9 +424,7 @@
                 <div
                   style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;"
                 >
-                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #18163a;"><![endif]-->
 
-                  <!--[if (mso)|(IE)]><td align="center" width="300" style="width: 300px;padding: 20px 20px 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
                   <div
                     class="u-col u-col-50"
                     style="max-width: 320px;min-width: 300px;display: table-cell;vertical-align: top;"
@@ -664,9 +651,7 @@
                 <div
                   style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;"
                 >
-                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: #f9f9f9;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #1c103b;"><![endif]-->
 
-                  <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
                   <div
                     class="u-col u-col-100"
                     style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"
@@ -719,8 +704,7 @@
                         <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
                     </div>
                   </div>
-                  <!--[if (mso)|(IE)]></td><![endif]-->
-                  <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+
                 </div>
               </div>
             </div>
@@ -736,9 +720,7 @@
                 <div
                   style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;"
                 >
-                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #f9f9f9;"><![endif]-->
 
-                  <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
                   <div
                     class="u-col u-col-100"
                     style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"

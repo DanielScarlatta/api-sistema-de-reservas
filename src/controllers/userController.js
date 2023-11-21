@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const User = require("@models/modelUser");
 const config = require('@config/index');
-const sendEmail = require('@modules/email/forgotEmail')
+const sendEmail = require('@modules/email/forgotEmail');
+const { default: mongoose } = require("mongoose");
 
 const secret = config.secret;
 
@@ -153,14 +154,92 @@ const user = {
       })
     }
 
+    const recoveryCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const expirationTime = Date.now() + 10 * 60 * 1000; // 10 minutos de validade
+
+    existUser.recoveryCode = recoveryCode;
+    existUser.expirationTime = expirationTime;
+    await existUser.save();
+
     try {
-      const result = await sendEmail(email, existUser.name, existUser.id);
+      const result = await sendEmail(email, existUser.name, recoveryCode);
       console.log("Email enviado com sucesso:", result);
       return res.status(200).json({ msg: "Email enviado com sucesso, por favor verifique sua caixa de entrada"})
     } catch (error) {
       console.error("Erro ao enviar o email:", error);
     }
-    
+  },
+
+  async checkCode(req, res) {
+    const { email, recoveryCode} = req.body
+
+    const existUser = await User.findOne({ email })
+
+    if(!existUser) {
+      return res.status(200).json({
+        msg: "Usuário não encontrado"
+      })
+    }
+
+    if(existUser.recoveryCode === recoveryCode) {
+      if (Date.now() < existUser.expirationTime) {
+        res.status(200).send('Código válido. Agora você pode redefinir sua senha.');
+      } else {
+        res.status(401).send('Código expirado. Solicite um novo código.');
+      }
+    } else {
+      res.status(401).send('Código inválido.');
+    }
+  },
+
+  async redefinePassword(req, res) {
+    const { email, password, confirmpassword, recoveryCode} = req.body
+
+    const existUser = await User.findOne({ email })
+
+    if(!existUser) {
+      return res.status(200).json({
+        msg: "Usuário não encontrado"
+      })
+    }
+
+    if (!password) {
+      return res.status(422).json({
+        msg: "A senha é obrigatório"
+      });
+    }
+    if (!confirmpassword) {
+      return res
+        .status(422)
+        .json({
+          msg: "A confirmação de senha é obrigatório"
+        });
+    }
+
+    if (password !== confirmpassword) {
+      return res.status(422).json({
+        msg: "As senhas não conferem!"
+      });
+    }
+
+    if(existUser.recoveryCode === recoveryCode) {
+      if (Date.now() < existUser.expirationTime) {
+        res.status(200).send('Código válido. Agora você pode redefinir sua senha.');
+      } else {
+        res.status(401).send('Código expirado. Solicite um novo código.');
+      }
+    } else {
+      res.status(401).send('Código inválido.');
+    }
+
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    User.password = passwordHash
+    existUser.recoveryCode = '';
+    existUser.expirationTime = 0;
+
+    await User.save()
   }
 };
 

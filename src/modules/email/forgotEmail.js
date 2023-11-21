@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendEmailForgot(email, name) {
+function sendEmailForgot(email, name, recoveryCode) {
   console.log(name)
   return new Promise((resolve, reject) => {
     const handlebarOptions = {
@@ -35,6 +35,7 @@ function sendEmailForgot(email, name) {
       template: "email",
       context: {
         name: name, // Provide the name variable to the template
+        tokenForgotPassword: recoveryCode
       },
     };
 
