@@ -170,28 +170,6 @@ const user = {
     }
   },
 
-  async checkCode(req, res) {
-    const { email, recoveryCode} = req.body
-
-    const existUser = await User.findOne({ email })
-
-    if(!existUser) {
-      return res.status(200).json({
-        msg: "Usuário não encontrado"
-      })
-    }
-
-    if(existUser.recoveryCode === recoveryCode) {
-      if (Date.now() < existUser.expirationTime) {
-        res.status(200).send('Código válido. Agora você pode redefinir sua senha.');
-      } else {
-        res.status(401).send('Código expirado. Solicite um novo código.');
-      }
-    } else {
-      res.status(401).send('Código inválido.');
-    }
-  },
-
   async redefinePassword(req, res) {
     const { email, password, confirmpassword, recoveryCode} = req.body
 
@@ -223,23 +201,22 @@ const user = {
     }
 
     if(existUser.recoveryCode === recoveryCode) {
-      if (Date.now() < existUser.expirationTime) {
-        res.status(200).send('Código válido. Agora você pode redefinir sua senha.');
-      } else {
-        res.status(401).send('Código expirado. Solicite um novo código.');
+      if (Date.now() > existUser.expirationTime) {
+        return res.status(401).send('Código expirado. Solicite um novo código.');
       }
     } else {
-      res.status(401).send('Código inválido.');
+      return res.status(401).json({ msg: "Código inválido."});
     }
 
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    User.password = passwordHash
+    existUser.password = passwordHash
     existUser.recoveryCode = '';
     existUser.expirationTime = 0;
 
-    await User.save()
+    await existUser.save();
+    res.status(200).json({ msg: "Senha redefinida com sucesso" });
   }
 };
 

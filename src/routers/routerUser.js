@@ -8,6 +8,7 @@ router
   .post('/v1/auth/register', userController.registerUser)
   .post('/v1/auth/login', userController.loginUser)
   .post('/v1/auth/forgot',  userController.forgotUser)
+  .post('/v1/auth/redefinePassword',  userController.redefinePassword)
 
 
 module.exports = router;
