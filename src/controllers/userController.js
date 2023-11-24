@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const User = require("@models/modelUser");
 const config = require('@config/index');
 const sendEmail = require('@modules/email/forgotEmail');
-const { default: mongoose } = require("mongoose");
 
 const secret = config.secret;
 
