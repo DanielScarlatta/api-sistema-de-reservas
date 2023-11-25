@@ -175,7 +175,7 @@ const user = {
     const existUser = await User.findOne({ email })
 
     if(!existUser) {
-      return res.status(200).json({
+      return res.status(422).json({
         msg: "Usuário não encontrado"
       })
     }
