@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "mongoose": "^8.0.1",
@@ -32,7 +34,8 @@
     "@models": "src/models",
     "@modules": "src/modules",
     "@routers": "src/routers",
-    "@services": "src/services"
+    "@services": "src/services",
+    "@cert": "src/ssl"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
