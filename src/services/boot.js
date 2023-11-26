@@ -17,16 +17,4 @@ module.exports = (err) => {
 
     console.log(`Server online![http] na porta ${config.app.port}`);
   });
-
-  https
-    .createServer(
-      {
-        cert: fs.readFileSync("src/ssl/certificate.crt"),
-        key: fs.readFileSync("src/ssl/private.key"),
-      },
-      app
-    )
-    .listen(config.app.portssl, () => {
-      console.log(`Server online![https] na porta ${config.app.portssl}`);
-    });
 };
