@@ -1,9 +1,6 @@
 const app = require("@app");
 const config = require("@config/index.js");
 
-const fs = require('fs')
-const https = require('https')
-
 module.exports = (err) => {
   console.clear();
   if (err) {
