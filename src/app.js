@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Configurando o CORS
 app.use(cors({
-  origin: 'https://scarlatta.com.br',
+  origin: '*',
   credentials: true,
 }));
 
