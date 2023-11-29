@@ -12,7 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Configurando o CORS
-app.use(cors());
+app.use(cors({
+  origin: 'https://scarlatta.com.br',
+  credentials: true,
+}));
 
 // Middleware para lidar com solicitações OPTIONS
 app.use((req, res, next) => {
