@@ -74,6 +74,7 @@ const user = {
     });
 
     try {
+      res.setHeader('Access-Control-Allow-Origin', 'https://scarlatta.com.br')
       await user.save();
       res.status(201).json({
         msg: "Usuario criado com sucesso!"
