@@ -74,7 +74,6 @@ const user = {
     });
 
     try {
-      res.setHeader('Access-Control-Allow-Origin', 'https://scarlatta.com.br')
       await user.save();
       res.status(201).json({
         msg: "Usuario criado com sucesso!"
@@ -131,6 +130,8 @@ const user = {
         },
         secret
       );
+      user.token = token;
+      await user.save();
 
       res.status(200).json({
         msg: "Usuário autenticado com sucesso!",
@@ -144,11 +145,15 @@ const user = {
   },
 
   async forgotUser(req, res) {
-    const { email } = req.body;
+    const {
+      email
+    } = req.body;
 
-    const existUser = await User.findOne({ email });
+    const existUser = await User.findOne({
+      email
+    });
 
-    if(!existUser) {
+    if (!existUser) {
       return res.status(200).json({
         msg: "Usuário não encontrado"
       })
@@ -164,18 +169,27 @@ const user = {
     try {
       const result = await sendEmail(email, existUser.name, recoveryCode);
       console.log("Email enviado com sucesso:", result);
-      return res.status(200).json({ msg: "Email enviado com sucesso, por favor verifique sua caixa de entrada"})
+      return res.status(200).json({
+        msg: "Email enviado com sucesso, por favor verifique sua caixa de entrada"
+      })
     } catch (error) {
       console.error("Erro ao enviar o email:", error);
     }
   },
 
   async redefinePassword(req, res) {
-    const { email, password, confirmpassword, recoveryCode} = req.body
+    const {
+      email,
+      password,
+      confirmpassword,
+      recoveryCode
+    } = req.body
 
-    const existUser = await User.findOne({ email })
+    const existUser = await User.findOne({
+      email
+    })
 
-    if(!existUser) {
+    if (!existUser) {
       return res.status(422).json({
         msg: "Usuário não encontrado"
       })
@@ -200,12 +214,14 @@ const user = {
       });
     }
 
-    if(existUser.recoveryCode === recoveryCode) {
+    if (existUser.recoveryCode === recoveryCode) {
       if (Date.now() > existUser.expirationTime) {
         return res.status(401).send('Código expirado. Solicite um novo código.');
       }
     } else {
-      return res.status(401).json({ msg: "Código inválido."});
+      return res.status(401).json({
+        msg: "Código inválido."
+      });
     }
 
     const salt = await bcrypt.genSalt(12);
@@ -216,7 +232,9 @@ const user = {
     existUser.expirationTime = 0;
 
     await existUser.save();
-    res.status(200).json({ msg: "Senha redefinida com sucesso" });
+    res.status(200).json({
+      msg: "Senha redefinida com sucesso"
+    });
   }
 };
 

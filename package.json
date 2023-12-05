@@ -34,8 +34,8 @@
     "@models": "src/models",
     "@modules": "src/modules",
     "@routers": "src/routers",
-    "@services": "src/services",
-    "@cert": "src/ssl"
+    "@services": "src/services"
+
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

@@ -5,7 +5,8 @@ const User = mongoose.model('User', {
   email: String,
   password: String,
   recoveryCode: String,
-  expirationTime: String
+  expirationTime: String,
+  token: String
 })
 
 module.exports = User
